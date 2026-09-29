@@ -1,6 +1,6 @@
 # Owner letter skills
 
-An independent research and agent-skill project about clear annual communication with business owners. Inspired by the repository structure of `tomdale/inside-mac`, it contains a reproducible private research workflow, eight installable skills, an original fictional example, and a PDF book builder. It is **not affiliated with or endorsed by Berkshire Hathaway or Warren Buffett**. The skills do not ask an agent to impersonate either party or give investment advice.
+An independent research and agent-skill project about clear annual communication with business owners. Inspired by the repository structure of `tomdale/inside-mac`, it contains a reproducible private research workflow, eight installable skills, public fictional and real-company examples, and a PDF book builder. It is **not affiliated with or endorsed by Berkshire Hathaway or Warren Buffett**. The skills do not ask an agent to impersonate either party or give investment advice.
 
 ## What is here
 
@@ -8,7 +8,8 @@ An independent research and agent-skill project about clear annual communication
 - `scripts/corpus.py`: initialize a private manifest, optionally fetch authorized sources, extract text, and validate coverage and quality.
 - `skills/`: a router plus architecture, voice, performance, capital allocation, risk, review, and PDF skills. Copy the folders into your agent's skills directory or point your agent at this repo's `skills/` directory.
 - `examples/sample-owner-update/`: an original fictional letter with a calculation ledger.
-- `scripts/build-book.py` and `output/pdf/sample-owner-update.pdf`: a repeatable example book build and its result.
+- `examples/nvidia-fy2026/`: an independent real-company illustration based on NVIDIA's public FY2026 filing, with source and calculation notes.
+- `scripts/build-book.py` and `output/pdf/`: repeatable example book builds and their rendered PDFs.
 
 The 48 entries correspond to fiscal years 1977–2024 in Berkshire's Buffett shareholder-letter archive. The 2025 letter is outside this corpus. This workspace has all 48 source files, extracted letters, per-letter reviews, and synthesis reports in ignored `.local/` files. Corpus and private-review validation both report 48/48. The validators prove provenance and coverage metadata, not independent coder agreement or perfect extraction. See `research/methodology.md` for the method and limits. The repository and skill ZIP intentionally omit the source-derived analyses.
 
@@ -89,11 +90,12 @@ The builder accepts a directory with `book.json` and ordered Markdown chapters. 
 
 ```sh
 python3 scripts/build-book.py examples/sample-owner-update --output output/pdf/sample-owner-update.pdf
+python3 scripts/build-book.py examples/nvidia-fy2026 --output output/pdf/nvidia-fy2026-letter.pdf
 ```
 
 This requires Python `reportlab` from `requirements.txt`. In Codex Desktop, the bundled workspace Python already includes it. The generated PDF is an example of the tooling, not a publication of Berkshire material. Check extracted text and rendered pages when adapting the builder for a new manuscript. The PDF has bookmarks but is not a tagged PDF; accessibility requirements beyond readable layout and extractable text need a separate production workflow.
 
-A real-company illustration based on NVIDIA's FY2026 filing is kept under ignored `.local/examples/nvidia-fy2026/` with its own source notes and PDF. It is an independent model letter, not a NVIDIA communication, and is excluded from the skill-only ZIP.
+The NVIDIA example is an independent model letter based on public filings, not a NVIDIA communication. Its source ledger is public so readers can review the factual and interpretive boundaries. Examples and PDFs remain excluded from the skill-only ZIP.
 
 ## Release status
 
