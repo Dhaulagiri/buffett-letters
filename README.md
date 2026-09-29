@@ -13,6 +13,19 @@ An independent research and agent-skill project about clear annual communication
 
 The 48 entries correspond to fiscal years 1977–2024 in Berkshire's Buffett shareholder-letter archive. The 2025 letter is outside this corpus. This workspace has all 48 source files, extracted letters, per-letter reviews, and synthesis reports in ignored `.local/` files. Corpus and private-review validation both report 48/48. The validators prove provenance and coverage metadata, not independent coder agreement or perfect extraction. See `research/methodology.md` for the method and limits. The repository and skill ZIP intentionally omit the source-derived analyses.
 
+## Skills
+
+| Skill | Use it to |
+| --- | --- |
+| [`owner-letter-style`](skills/owner-letter-style/) | Route an owner-update task to the appropriate specialist skills and enforce the source-ledger, non-impersonation, and review boundaries. |
+| [`owner-letter-architecture`](skills/owner-letter-architecture/) | Structure or reorganize a letter around the period's material results, decisions, setbacks, and uncertainties. |
+| [`owner-letter-voice`](skills/owner-letter-voice/) | Edit for plain, specific, candid prose in the actual author's voice without imitating a named writer. |
+| [`owner-letter-performance`](skills/owner-letter-performance/) | Explain operating and financial results using checked metrics, comparable periods, and clearly labeled interpretation. |
+| [`owner-letter-capital-allocation`](skills/owner-letter-capital-allocation/) | Explain consequential uses of capital, alternatives, financing, tradeoffs, assumptions, and uncertain outcomes. |
+| [`owner-letter-risk-and-errors`](skills/owner-letter-risk-and-errors/) | Describe setbacks, mistakes, uncertainty, and unresolved risks without concealment or invented admissions. |
+| [`owner-letter-review`](skills/owner-letter-review/) | Review factual support, arithmetic, period consistency, attribution, candor, and fact-versus-judgment boundaries. |
+| [`owner-letter-pdf-book`](skills/owner-letter-pdf-book/) | Turn an original Markdown manuscript into a navigable PDF and verify its text, links, and rendered layout. |
+
 ## Use the skills
 
 Copy `skills/owner-letter-*` directories to an agent's skills folder (for example, a project `.agents/skills/` directory), then ask:
