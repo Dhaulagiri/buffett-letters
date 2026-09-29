@@ -53,36 +53,33 @@ python3 -m unittest discover -s tests -v
 python3 scripts/audit-release.py
 ```
 
-`python3 scripts/analyze.py prepare --compact` makes ignored reading jobs under `.local/analysis-jobs/`. Then run [`research/analyze.workflow.js`](research/analyze.workflow.js) with a workflow runner that provides `agent()`, `parallel()`, `phase()`, and `log()`, such as `pi-dynamic-workflows`. Pass three absolute paths:
-
-- `args.jobs`: `.local/analysis-jobs`
-- `args.privateOut`: an output directory under `.local/`, such as `.local/workflow-run`
-- `args.out`: a candidate skill directory, preferably `.local/generated-skills` for review
-
-The workflow sends one small-model agent to every letter, consolidates four eras in parallel, and sends those private summaries to one large-model synthesis agent. All per-letter reports, era reports, and synthesis notes go to `args.privateOut`. Only original candidate skill instructions go to `args.out`. Review the candidate skills before copying them into `skills/`.
-
-One concrete local setup uses Pi and the Dynamic Workflows runner that supports the workflow's `small` and `big` model tiers:
+Prepare the private reading jobs:
 
 ```sh
-npm install -g @mariozechner/pi-coding-agent
-pi install npm:@quintinshaw/pi-dynamic-workflows
-cd /absolute/path/to/buffett-letters
-pi
+python3 scripts/analyze.py prepare --compact
 ```
 
-Authenticate with `/login` if needed. In Pi, run the following, replacing the repository prefix if your checkout is elsewhere:
+Then run [`research/analyze.workflow.js`](research/analyze.workflow.js) from the repository root with a workflow runner that provides `agent()`, `parallel()`, `phase()`, and `log()`. For example, after installing Pi once with `npm install -g @mariozechner/pi-coding-agent`:
 
-```text
-/workflows run Read /absolute/path/to/buffett-letters/research/analyze.workflow.js and invoke the workflow tool with that file's exact JavaScript as the script. Pass this args object: {"jobs":"/absolute/path/to/buffett-letters/.local/analysis-jobs","privateOut":"/absolute/path/to/buffett-letters/.local/workflow-run","out":"/absolute/path/to/buffett-letters/.local/generated-skills"}. Keep all analysis and synthesis rationale under privateOut. Do not copy candidate skills into the tracked skills directory.
+```sh
+pi -e npm:@quintinshaw/pi-dynamic-workflows
 ```
 
-The runner accepts workflow source through its tool rather than executing this file with `node`. After completion, validate the new per-letter records and inspect the generated skills:
+In Pi, ask:
+
+> Run the workflow in `research/analyze.workflow.js` exactly as written.
+
+No arguments are needed. The workflow reads `.local/analysis-jobs`, writes all source-derived reports and synthesis notes to `.local/workflow-run`, and writes candidate skills to `.local/generated-skills`. It sends one small-model agent to every letter, consolidates four eras, and sends those private summaries to one large-model synthesis agent.
+
+After it finishes:
 
 ```sh
 python3 scripts/analyze.py validate-full --analyses .local/workflow-run
 diff -ru skills .local/generated-skills
 python3 scripts/audit-release.py
 ```
+
+Review candidate skills before copying them into `skills/`. The runner evaluates the workflow source through its workflow tool; `research/analyze.workflow.js` is not a standalone Node program.
 
 `python3 scripts/analyze.py validate-full` checks the existing private review records against source hashes and prepared chunk coverage; it cannot certify reading quality. `python3 scripts/index-corpus.py` creates a private navigation index. Neither command writes analysis into Git.
 

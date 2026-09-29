@@ -2,13 +2,14 @@
 // Runs with pi-dynamic-workflows or another runner providing
 // agent(), parallel(), phase(), log(), and args.
 //
-// Required arguments:
-//   args.jobs       absolute path to .local/analysis-jobs
+// Optional:
+//   args.years      array of fiscal years (defaults to 1977–2024)
+//   args.jobs       absolute path to prepared jobs
 //   args.privateOut absolute path under .local for private reports
 //   args.out        absolute path for generated candidate skills
 //
-// Optional:
-//   args.years      array of fiscal years (defaults to 1977–2024)
+// With no arguments, all inputs and outputs use ignored .local directories
+// beneath the current repository.
 //
 // Every source-derived artifact is written beneath args.privateOut.
 // Only original skill instructions are written beneath args.out.
@@ -21,9 +22,10 @@ export const meta = {
 
 const allYears = Array.from({ length: 48 }, (_, index) => 1977 + index);
 const years = args.years ?? allYears;
-const jobs = String(args.jobs ?? '');
-const privateOut = String(args.privateOut ?? '');
-const skillOut = String(args.out ?? '');
+const root = String(process.cwd()).replace(/\/$/, '');
+const jobs = String(args.jobs ?? `${root}/.local/analysis-jobs`);
+const privateOut = String(args.privateOut ?? `${root}/.local/workflow-run`);
+const skillOut = String(args.out ?? `${root}/.local/generated-skills`);
 
 if (!jobs.startsWith('/') || !privateOut.startsWith('/') || !skillOut.startsWith('/')) {
   throw new Error('args.jobs, args.privateOut, and args.out must be absolute paths');
