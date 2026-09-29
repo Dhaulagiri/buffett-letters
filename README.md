@@ -1,15 +1,14 @@
 # Owner letter skills
 
-An independent research and agent-skill project about clear annual communication with business owners. Inspired by the repository structure of `tomdale/inside-mac`, it contains a reproducible private research workflow, eight installable skills, public fictional and real-company examples, and a PDF book builder. It is **not affiliated with or endorsed by Berkshire Hathaway or Warren Buffett**. The skills do not ask an agent to impersonate either party or give investment advice.
+An independent research and agent-skill project about clear annual communication with business owners. Inspired by the repository structure of `tomdale/inside-mac`, it contains a reproducible private research workflow, seven installable skills, and public fictional and real-company examples. It is **not affiliated with or endorsed by Berkshire Hathaway or Warren Buffett**. The skills do not ask an agent to impersonate either party or give investment advice.
 
 ## What is here
 
 - `research/`: the reproducible agent workflow, methodology, a URL-free manifest scaffold, and the rights boundary. It contains no source-derived analysis.
 - `scripts/corpus.py`: initialize a private manifest, optionally fetch authorized sources, extract text, and validate coverage and quality.
-- `skills/`: a router plus architecture, voice, performance, capital allocation, risk, review, and PDF skills. Copy the folders into your agent's skills directory or point your agent at this repo's `skills/` directory.
+- `skills/`: a router plus architecture, voice, performance, capital allocation, risk, and review skills. Copy the folders into your agent's skills directory or point your agent at this repo's `skills/` directory.
 - `examples/sample-owner-update/`: an original fictional letter with a calculation ledger.
 - `examples/nvidia-fy2026/`: an independent real-company illustration based on NVIDIA's public FY2026 filing, with source and calculation notes.
-- `scripts/build-book.py` and `output/pdf/`: repeatable example book builds and their rendered PDFs.
 
 The 48 entries correspond to fiscal years 1977–2024 in Berkshire's Buffett shareholder-letter archive. The 2025 letter is outside this corpus. This workspace has all 48 source files, extracted letters, per-letter reviews, and synthesis reports in ignored `.local/` files. Corpus and private-review validation both report 48/48. The validators prove provenance and coverage metadata, not independent coder agreement or perfect extraction. See `research/methodology.md` for the method and limits. The repository and skill ZIP intentionally omit the source-derived analyses.
 
@@ -24,7 +23,6 @@ The 48 entries correspond to fiscal years 1977–2024 in Berkshire's Buffett sha
 | [`owner-letter-capital-allocation`](skills/owner-letter-capital-allocation/) | Explain consequential uses of capital, alternatives, financing, tradeoffs, assumptions, and uncertain outcomes. |
 | [`owner-letter-risk-and-errors`](skills/owner-letter-risk-and-errors/) | Describe setbacks, mistakes, uncertainty, and unresolved risks without concealment or invented admissions. |
 | [`owner-letter-review`](skills/owner-letter-review/) | Review factual support, arithmetic, period consistency, attribution, candor, and fact-versus-judgment boundaries. |
-| [`owner-letter-pdf-book`](skills/owner-letter-pdf-book/) | Turn an original Markdown manuscript into a navigable PDF and verify its text, links, and rendered layout. |
 
 ## Use the skills
 
@@ -40,11 +38,11 @@ To create the **skill-only distribution** from this private workspace, run:
 python3 scripts/package-skills.py
 ```
 
-The resulting `output/owner-letter-skills.zip` contains only the eight skill folders and `LICENSE`. The command rejects external URLs, letter-level source IDs, and unexpected files inside `skills/`. It excludes the corpus, analysis, examples, scripts, private source ledger, and generated PDFs. Inspect the ZIP before distributing it; packaging is a content boundary, not legal clearance.
+The resulting `output/owner-letter-skills.zip` contains only the seven skill folders and `LICENSE`. The command rejects external URLs, letter-level source IDs, and unexpected files inside `skills/`. It excludes the corpus, analysis, examples, scripts, and private source ledger. Inspect the ZIP before distributing it; packaging is a content boundary, not legal clearance.
 
 ## Reproduce the local research pipeline
 
-Python 3.10+ is required. Install `requirements.txt` for PDF extraction and book building; HTML-only corpus commands use the standard library. The commands below create ignored files under `.local/`; they do not fetch anything until the explicit fetch command. Read `research/rights.md` and assess your authorization before supplying sources or running a fetch. The public manifest deliberately contains no URLs.
+Python 3.10+ is required. Install `requirements.txt` for the fallback reader used by PDF source letters; HTML-only corpus commands use the standard library. The commands below create ignored files under `.local/`; they do not fetch anything until the explicit fetch command. Read `research/rights.md` and assess your authorization before supplying sources or running a fetch. The public manifest deliberately contains no URLs.
 
 ```sh
 python3 -m pip install -r requirements.txt
@@ -97,18 +95,7 @@ Review candidate skills before copying them into `skills/`. The runner evaluates
 
 `python3 scripts/analyze.py validate-full` checks the existing private review records against source hashes and prepared chunk coverage; it cannot certify reading quality. `python3 scripts/index-corpus.py` creates a private navigation index. Neither command writes analysis into Git.
 
-## Build the example PDF
-
-The builder accepts a directory with `book.json` and ordered Markdown chapters. It supports headings, paragraphs, bullets, simple pipe tables, bold/italic/code spans, and web links. It generates a contents page, PDF bookmarks, running heads, and page numbers. It intentionally rejects some malformed input rather than claiming to be a full CommonMark renderer.
-
-```sh
-python3 scripts/build-book.py examples/sample-owner-update --output output/pdf/sample-owner-update.pdf
-python3 scripts/build-book.py examples/nvidia-fy2026 --output output/pdf/nvidia-fy2026-letter.pdf
-```
-
-This requires Python `reportlab` from `requirements.txt`. In Codex Desktop, the bundled workspace Python already includes it. The generated PDF is an example of the tooling, not a publication of Berkshire material. Check extracted text and rendered pages when adapting the builder for a new manuscript. The PDF has bookmarks but is not a tagged PDF; accessibility requirements beyond readable layout and extractable text need a separate production workflow.
-
-The NVIDIA example is an independent model letter based on public filings, not a NVIDIA communication. Its source ledger is public so readers can review the factual and interpretive boundaries. Examples and PDFs remain excluded from the skill-only ZIP.
+The NVIDIA example is an independent model letter based on public filings, not a NVIDIA communication. Its source ledger is public so readers can review the factual and interpretive boundaries. Examples remain excluded from the skill-only ZIP.
 
 ## Release status
 

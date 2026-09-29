@@ -1,6 +1,6 @@
 ---
 name: owner-letter-style
-description: Route drafting or editing of an annual owner update to focused skills for structure, performance, capital allocation, risk, voice, review, and PDF production. Use for shareholder style business communication, not for investment recommendations or impersonation.
+description: Route drafting or editing of an annual owner update to focused skills for structure, performance, capital allocation, risk, voice, and review. Use for shareholder style business communication, not for investment recommendations or impersonation.
 ---
 
 # Owner letter style
@@ -18,7 +18,6 @@ Establish the audience, business, period, purpose, and whether the company is re
 - For cash use, financing, acquisitions, dividends, or repurchases, use `owner-letter-capital-allocation`.
 - For setbacks, uncertainty, and changed judgments, use `owner-letter-risk-and-errors`.
 - Before delivery, use `owner-letter-review`.
-- For a Markdown manuscript that needs a PDF, use `owner-letter-pdf-book`.
 
 Use only the specialists relevant to the request. Preserve a user's chosen format and scope.
 

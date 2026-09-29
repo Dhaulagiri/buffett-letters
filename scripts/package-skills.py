@@ -19,8 +19,8 @@ def package(root: Path, output: Path) -> int:
     folders = sorted(p for p in skills.iterdir() if p.is_dir())
     if any(not (folder / "SKILL.md").is_file() for folder in folders):
         raise ValueError("Every skill folder must contain SKILL.md")
-    if len(folders) != 8:
-        raise ValueError(f"Expected 8 skills, found {len(folders)}")
+    if len(folders) != 7:
+        raise ValueError(f"Expected 7 skills, found {len(folders)}")
     for path in files:
         if path.is_symlink() or path.suffix != ".md":
             raise ValueError(f"Unexpected skill asset: {path}")

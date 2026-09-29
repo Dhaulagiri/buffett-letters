@@ -2,13 +2,13 @@
 
 ## Implementation status (September 2026)
 
-The repository has a local corpus pipeline, a reproducible multi-agent analysis workflow, eight agent skills, a fictional example, and a working PDF build. All 48 letters, per-letter reviews, and synthesis reports live in ignored local storage. Corpus validation and the private full-review validator both report 48/48. The tracked repository contains methodology and original skill instructions, but no source-derived analysis. Public release remains subject to the rights review in `research/rights.md`.
+The repository has a local corpus pipeline, a reproducible multi-agent analysis workflow, seven agent skills, and fictional and real-company examples. All 48 letters, per-letter reviews, and synthesis reports live in ignored local storage. Corpus validation and the private full-review validator both report 48/48. The tracked repository contains methodology and original skill instructions, but no source-derived analysis. Public release remains subject to the rights review in `research/rights.md`.
 
 ## Goal
 
-Build a repository modeled on `tomdale/inside-mac`: reproducible research, a set of installable agent skills, review rules, examples, and a Markdown-to-PDF book pipeline. The subject is the communication and reasoning techniques in **Warren Buffett's Berkshire Hathaway annual shareholder letters**, not a collection of republished letters or a generator that claims to be Buffett.
+Build a repository modeled on `tomdale/inside-mac`: reproducible research, a set of installable agent skills, review rules, and examples. The subject is the communication and reasoning techniques in **Warren Buffett's Berkshire Hathaway annual shareholder letters**, not a collection of republished letters or a generator that claims to be Buffett.
 
-The first release should help an agent write and review clear, evidence-backed owner updates about a business. It should also produce a polished, cited example booklet from original text.
+The first release should help an agent write and review clear, evidence-backed owner updates about a business and provide inspectable examples with calculation and source notes.
 
 ## Scope and source boundary
 
@@ -32,7 +32,6 @@ scripts/
   fetch-sources.*               # explicit opt-in local fetch; rate limited
   extract-text.*                # HTML/PDF normalization and diagnostics
   validate-corpus.*             # year, hash, format, and extraction checks
-  build-book.*                  # Markdown to PDF
 skills/
   owner-letter-style/SKILL.md   # router and shared contract
   owner-letter-architecture/SKILL.md
@@ -41,7 +40,6 @@ skills/
   owner-letter-capital-allocation/SKILL.md
   owner-letter-risk-and-errors/SKILL.md
   owner-letter-review/SKILL.md
-  owner-letter-pdf-book/SKILL.md
   owner-letter-style/references/sources.md
 examples/
   sample-owner-update/         # wholly original, sourced or fictional and clearly labeled
@@ -49,7 +47,7 @@ tests/
   fixtures/                    # small synthetic extraction fixtures
 ```
 
-The skill names are provisional. Keep each `SKILL.md` short enough to route work, with detailed checklists in references. Use the standard skill frontmatter and document how to copy `skills/` into an agent's skill directory. The PDF skill should work on an ordinary Markdown project, independent of a particular agent runtime.
+Keep each `SKILL.md` short enough to route work, with detailed checklists in references. Use the standard skill frontmatter and document how to copy `skills/` into an agent's skill directory.
 
 ## Work phases
 
@@ -80,7 +78,6 @@ Use a written coding rubric across the full set, then close-read a stratified sa
 - **Capital allocation:** explain alternatives, tradeoffs, deployment criteria, and what was learned, without turning historical examples into current investment advice.
 - **Risk and errors:** make uncertainty, adverse results, mistakes, and unresolved questions visible.
 - **Review:** check factual support, arithmetic, period consistency, omitted bad news, invented quotes, overconfidence, and whether the reader can tell fact from interpretation.
-- **PDF book:** compile original Markdown into a navigable, print-quality PDF with contents, running heads, accessible headings, and source notes.
 
 Include positive and negative examples using fictional businesses or authorized public facts. Any example financial data should have a checked calculation and source ledger.
 
@@ -88,9 +85,9 @@ Include positive and negative examples using fictional businesses or authorized 
 
 ### 5. Produce and test an end-to-end example
 
-Write an original multi-section owner update for a clearly fictional company, including a short metric table, one material mistake, an allocation decision, risks, and a reasoned outlook. Run the review skill, record the issues it catches, revise, and build the PDF. Include source Markdown and a reproduction command. Test skill installation, corpus validation, PDF generation, links/bookmarks, text extraction, and visual layout. Run a second cold-start prompt to check that the router picks the right skill and does not fabricate facts.
+Write an original multi-section owner update for a clearly fictional company, including a short metric table, one material mistake, an allocation decision, risks, and a reasoned outlook. Run the review skill, record the issues it catches, and revise. Include source Markdown and calculation notes. Test skill installation and corpus validation. Run a second cold-start prompt to check that the router picks the right skill and does not fabricate facts.
 
-**Gate:** clean-checkout instructions reproduce the example PDF; the review catches seeded errors in arithmetic, unsupported claims, and year attribution.
+**Gate:** the review catches seeded errors in arithmetic, unsupported claims, and year attribution.
 
 ### 6. Publish only after the release gate
 
@@ -103,19 +100,19 @@ Write a README that explains purpose, install/use commands, corpus scope, method
 3. Coding rubric and private evidence-backed analysis.
 4. Router, voice, architecture, and review skills as the smallest usable set.
 5. Remaining specialist skills and example.
-6. PDF pipeline, clean-checkout verification, and release review.
+6. Clean-checkout verification and release review.
 
 ## Definition of done
 
 - The corpus coverage and extraction limits are explicit and reproducible.
 - Every material skill rule traces to research evidence and is written as an original, portable instruction.
-- The package installs as agent skills and successfully drafts, reviews, and renders a complete original example.
+- The package installs as agent skills and successfully drafts and reviews a complete original example.
 - The README states that the project is independent of Berkshire Hathaway and Warren Buffett.
 - Public contents pass the documented rights review.
 
 ## Research references checked for this plan
 
-- `tomdale/inside-mac` README: skill router, specialist skills, research workflow, ignored local corpus, examples, and PDF pipeline.
+- `tomdale/inside-mac` README: skill router, specialist skills, research workflow, ignored local corpus, and examples.
 - Berkshire Hathaway official Buffett shareholder-letter archive: 1977–2024, with its note about the 1965–2024 book.
 - Berkshire Hathaway official Greg Abel shareholder-letter archive: 2025 listed separately.
 - Berkshire Hathaway legal disclaimer: explicit restrictions on reproduction, distribution, and linking without written permission.

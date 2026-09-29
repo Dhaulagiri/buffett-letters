@@ -163,11 +163,10 @@ Write exactly these skill folders under ${skillOut}, each with a SKILL.md:
 - owner-letter-capital-allocation
 - owner-letter-risk-and-errors
 - owner-letter-review
-- owner-letter-pdf-book
 
 The router may also contain references/sources.md, but that file may describe only research scope, method, limits, non-affiliation, and the private-source boundary. Do not include year-by-year evidence, source locations, quotations, source links, or analysis reports anywhere in the skill output.
 
-Use YAML frontmatter with name and a description saying when to use the skill. Make instructions dense, imperative, and useful without access to the corpus. Preserve counterexamples: no fixed architecture, permanent metric, mandatory brevity, manufactured candor, or Buffett impersonation. Require a source ledger for the user's business and distinguish facts, interpretation, and forecasts. The PDF skill must work independently of this workflow.
+Use YAML frontmatter with name and a description saying when to use the skill. Make instructions dense, imperative, and useful without access to the corpus. Preserve counterexamples: no fixed architecture, permanent metric, mandatory brevity, manufactured candor, or Buffett impersonation. Require a source ledger for the user's business and distinguish facts, interpretation, and forecasts.
 
 This is synthesis, not imitation. Use original prose. Do not reproduce source sentences, distinctive phrases, anecdotes, or investment advice. Do not claim endorsement.
 

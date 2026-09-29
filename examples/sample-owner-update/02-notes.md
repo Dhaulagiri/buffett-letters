@@ -1,6 +1,6 @@
 # Example notes and verification
 
-This example uses entirely invented company facts. Its purpose is to exercise the skill package and PDF builder. It is not an analysis of Berkshire Hathaway, a quote from Warren Buffett, or a prediction about any security.
+This example uses entirely invented company facts. Its purpose is to exercise the skill package. It is not an analysis of Berkshire Hathaway, a quote from Warren Buffett, or a prediction about any security.
 
 ## Calculation ledger
 
