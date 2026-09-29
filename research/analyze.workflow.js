@@ -38,15 +38,27 @@ if (!years.length || years.some((year) => !allYears.includes(year))) {
 const reviewSchema = {
   type: 'object',
   required: [
+    'schema_version',
     'year',
+    'format',
+    'source_sha256',
+    'segment_count',
+    'chunk_count',
     'chunks_reviewed',
+    'review_scope',
     'findings',
     'counterexamples',
-    'extraction_or_attribution_limits',
+    'extraction_issues',
   ],
   properties: {
+    schema_version: { type: 'integer', const: 1 },
     year: { type: 'integer' },
+    format: { type: 'string' },
+    source_sha256: { type: 'string' },
+    segment_count: { type: 'integer' },
+    chunk_count: { type: 'integer' },
     chunks_reviewed: { type: 'array', items: { type: 'integer' } },
+    review_scope: { type: 'string', const: 'all extracted chunks read' },
     findings: {
       type: 'array',
       minItems: 3,
@@ -73,7 +85,7 @@ const reviewSchema = {
         },
       },
     },
-    extraction_or_attribution_limits: {
+    extraction_issues: {
       type: 'array',
       items: { type: 'string' },
     },
@@ -86,6 +98,8 @@ The private reading job is in JOB. Read index.json and EVERY part file listed th
 Study owner orientation, scorecard definitions and limits, reported versus underlying economics, capital allocation, adverse results and mistakes, uncertainty and horizon, concrete operating explanation, architecture, and voice. Record material counterexamples that should prevent rigid style rules.
 
 Paraphrase throughout. Do not reproduce source sentences, distinctive phrases, URLs, or investment recommendations. Distinguish the principal author's writing from appendices and guest material.
+
+Use the job metadata to set schema_version to 1, year, format, source_sha256, segment_count, and chunk_count. Set chunks_reviewed to every part number in ascending order and review_scope to exactly "all extracted chunks read". Record extraction or attribution limits in extraction_issues.
 
 Before returning, create PRIVATE if needed and write the same JSON object to PRIVATE/B-YEAR.json. This private file must contain the complete review and no source quotations or URLs.`;
 
